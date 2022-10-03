@@ -19,6 +19,8 @@ class Room(models.Model):
     updated = models.DateTimeField(auto_now=True) #every time its updated
     created = models.DateTimeField(auto_now_add=True) #only changes on creation
 
+    class Meta:
+        ordering = ['-updated','-created'] # by using "-" it makes it descending
 
     def __str__(self):
         return str(self.name)
