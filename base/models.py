@@ -15,7 +15,7 @@ class Room(models.Model):
     topic = models.ForeignKey(Topic, on_delete=models.SET_NULL, null = True)
     name = models.CharField(max_length=200)
     description = models.TextField(null=True, blank=True)
-    #participants =
+    participants = models.ManyToManyField(User, related_name='participants', blank=True)
     updated = models.DateTimeField(auto_now=True) #every time its updated
     created = models.DateTimeField(auto_now_add=True) #only changes on creation
 
@@ -35,3 +35,6 @@ class Message(models.Model):
 
     def __str__(self):
         return self.body[0:50]
+
+    class Meta:
+        ordering = ['-updated','-created'] # by using "-" it makes it descending
