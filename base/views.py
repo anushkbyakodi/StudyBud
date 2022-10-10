@@ -3,13 +3,12 @@ from django.http import HttpResponse
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
-from .forms import RoomForm, UserForm
-from django.contrib.auth.models import User
+from .forms import RoomForm, UserForm, MyUserCreationForm
+
 from django.contrib import messages 
-from django.contrib.auth.forms import UserCreationForm
 # Create your views here.
 
-from .models import Room, Topic, Message
+from .models import Room, Topic, Message, User
 
 # rooms = [
 #     {'id': 1, 'name': "Django"},
@@ -49,11 +48,11 @@ def logoutUser(request):
 
 def registerPage(request):
     page = 'register'
-    form = UserCreationForm()
+    form = MyUserCreationForm()
     context = {'form': form}
 
     if request.method=="POST":
-        form = UserCreationForm(request.POST)
+        form = MyUserCreationForm(request.POST, request.FILES)
 
         if form.is_valid():
             user = form.save(commit=False)
@@ -192,7 +191,7 @@ def updateUser(request):
     form = UserForm(instance=user)
 
     if request.method=="POST":
-        form = UserForm(request.POST, instance = user)
+        form = UserForm(request.POST, request.FILES, instance = user)
 
         if form.is_valid():
             form.save()
