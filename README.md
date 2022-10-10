@@ -57,4 +57,4 @@ You can now access the server at local host: http://127.0.0.1:8000/
 - API functionalities for Rooms included
 - Custom User models with options to Upload profile pics
 - Hosted on Heroku Platform
-- Use API check web page to see how information form api can be used to host websites.
+- Use coolwebsites page to check how information form api can be used to host websites.
